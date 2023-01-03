@@ -1,0 +1,41 @@
+void rec(vector<vector<int>>&ds, vector<int>&v, int k, int target, vector<int>&mark,int count)
+{
+    if(count==k)
+    {
+        if(target==0)
+        {
+            vector<int>v2 = v;
+            sort(v2.begin(),v2.end());
+            if(find(ds.begin(),ds.end(),v2)==ds.end())
+        {
+            ds.push_back(v2);
+        }
+        }
+        return;
+    }
+    int mini = min(target,9);
+    for(int i=1;i<=mini;i++)
+    {
+        if(mark[i]==0)
+        {
+            mark[i]=1;
+            v.push_back(i);
+             rec(ds,v,k,target-i,mark,count+1);
+             v.pop_back();
+             mark[i]=0;
+        }
+    }
+}
+class Solution {
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>>ds;
+        vector<int>v;
+        vector<int>mark(10,0);
+        rec(ds,v,k,n,mark,0);
+        return ds;
+    }
+};
+
+
+Submission link - https://leetcode.com/problems/combination-sum-iii/submissions/870382210/
